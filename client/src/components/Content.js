@@ -1,4 +1,6 @@
 import Card from "./Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 
 const Content = (props) => {
   return (
@@ -16,8 +18,9 @@ const Content = (props) => {
             />
           ))}
         {props.loading && (
-          <div className="w-full flex justify-center col-span-6 text-3xl font-bold text-purple-800">
-            Loading...
+          <div className="w-full flex flex-col content-center items-center space-y-5 col-span-6 text-3xl font-bold text-purple-800">
+            <p>Loading...</p>
+            <FontAwesomeIcon icon={faCircleNotch} spin={true} />
           </div>
         )}
       </div>
