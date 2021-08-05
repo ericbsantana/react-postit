@@ -18,16 +18,15 @@ mongoose.connect(db.uri, {
   useUnifiedTopology: true,
 });
 
-app.use(express.json());
-app.use(cors());
-app.use(postitRoute);
-
 if (process.env.NODE_ENV !== "production") {
   app.use(function (req, res, next) {
     setTimeout(next, 500);
   }); //DELAY FOR TESTING
   app.use(cors());
 }
+
+app.use(express.json());
+app.use(postitRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client", "build")));
