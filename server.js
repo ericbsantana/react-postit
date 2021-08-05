@@ -6,10 +6,8 @@ const path = require("path");
 
 const port = process.env.PORT || 3001;
 
-// routes
 const postitRoute = require("./routes/postit");
 
-//init express
 const app = express();
 
 mongoose.connect(db.uri, {
@@ -21,7 +19,7 @@ mongoose.connect(db.uri, {
 if (process.env.NODE_ENV !== "production") {
   app.use(function (req, res, next) {
     setTimeout(next, 500);
-  }); //DELAY FOR TESTING
+  });
   app.use(cors());
 }
 
@@ -37,5 +35,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(port, () => {
-  console.log("Server is running on port " + port);
+  console.log("Thank you for running me! I'm running on port " + port);
 });
