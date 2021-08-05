@@ -1,15 +1,83 @@
-const Sidebar = () => {
+import { useState } from "react";
+import axios from "axios";
+
+const Sidebar = (props) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [errors, setErrors] = useState({ title: null, description: null });
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const validateForm = async (e) => {
+    setErrors({ title: null, description: null });
+    e.preventDefault();
+    if (!title.trim().length) {
+      setErrors((prevState) => ({
+        ...prevState,
+        title: "Title is empty",
+      }));
+
+      return;
+    }
+
+    if (!description.trim().length) {
+      setErrors((prevState) => ({
+        ...prevState,
+        description: "Description is empty",
+      }));
+
+      return;
+    }
+
+    handleSubmit();
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const data = await axios.post("/create", {
+        title: title,
+        description: description,
+      });
+      console.log(data);
+      setTitle("");
+      setDescription("");
+      props.fetchPostIts();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <aside className="sticky top-0 h-screen p-5 space-y-5 flex flex-col justify-center">
       <h1 className=" text-3xl text-purple-800 font-bold">Notepad</h1>
-      <form className="form space-y-5">
-        <div>
+      <form
+        className="form space-y-5"
+        onSubmit={(e) => {
+          validateForm(e);
+        }}
+      >
+        <div className="space-y-3">
           <input
             className="w-full rounded-lg shadow-md bg-gray-100 border-0 focus:border focus:border-purple-800 text-gray-800 ring-1 ring-gray-50 outline-none focus:ring-1 focus:ring-purple-800"
             type="text"
             name="name"
             placeholder="Title"
+            onChange={(e) => {
+              handleTitle(e);
+            }}
+            value={title}
           />
+
+          {errors.title && (
+            <p className="block text-xs text-red-600">{errors.title}</p>
+          )}
         </div>
         <div>
           <textarea
@@ -18,7 +86,14 @@ const Sidebar = () => {
             name="description"
             placeholder="Description"
             rows="5"
+            onChange={(e) => {
+              handleDescription(e);
+            }}
+            value={description}
           />
+          {errors.description && (
+            <p className="block text-xs text-red-600">{errors.description}</p>
+          )}
         </div>
         <div className="ml-auto justify-end">
           <button
