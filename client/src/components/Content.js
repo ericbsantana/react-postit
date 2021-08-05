@@ -24,8 +24,8 @@ const Content = () => {
       setLoading(true);
       const response = await axios.delete("/delete", { data: { id: id } });
       console.log(response);
-      fetchPostIts();
       setLoading(false);
+      fetchPostIts();
     } catch (err) {
       console.log(err.message);
     }
