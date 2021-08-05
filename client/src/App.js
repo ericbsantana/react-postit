@@ -4,7 +4,6 @@ import Content from "./components/Content";
 import Sidebar from "./components/Sidebar";
 
 import axios from "axios";
-axios.defaults.baseURL = "http://192.168.15.99:3001";
 
 function App() {
   const [data, setData] = useState(null);
