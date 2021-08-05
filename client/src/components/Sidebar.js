@@ -21,7 +21,7 @@ const Sidebar = (props) => {
     if (!title.trim().length) {
       setErrors((prevState) => ({
         ...prevState,
-        title: "Title is empty",
+        title: "Title is empty.",
       }));
 
       return;
@@ -30,7 +30,7 @@ const Sidebar = (props) => {
     if (!description.trim().length) {
       setErrors((prevState) => ({
         ...prevState,
-        description: "Description is empty",
+        description: "Description is empty.",
       }));
 
       return;
