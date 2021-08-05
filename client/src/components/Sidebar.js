@@ -1,5 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar = (props) => {
   const [title, setTitle] = useState("");
@@ -36,27 +38,16 @@ const Sidebar = (props) => {
       return;
     }
 
-    handleSubmit();
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const data = await axios.post("/create", {
-        title: title,
-        description: description,
-      });
-      console.log(data);
-      setTitle("");
-      setDescription("");
-      props.fetchPostIts();
-    } catch (err) {
-      console.log(err);
-    }
+    props.addCard({ title: title, description: description });
+    setTitle("");
+    setDescription("");
   };
 
   return (
-    <aside className="sticky top-0 h-screen p-5 space-y-5 flex flex-col justify-center">
-      <h1 className=" text-3xl text-purple-800 font-bold">Notepad</h1>
+    <aside className="sticky top-0 lg:h-screen p-5 space-y-5 flex flex-col justify-center">
+      <h1 className="text-center text-3xl text-purple-800 font-bold lg:text-left">
+        Notepad
+      </h1>
       <form
         className="form space-y-5"
         onSubmit={(e) => {
@@ -95,15 +86,24 @@ const Sidebar = (props) => {
             <p className="block text-xs text-red-600">{errors.description}</p>
           )}
         </div>
-        <div className="ml-auto justify-end">
+        <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-yellow-600 px-5 py-2 rounded-lg text-white shadow-md font-bold uppercase hover:"
+            className="w-full lg:w-40 bg-yellow-600 px-5 py-2 rounded-lg text-white shadow-md font-bold uppercase hover:bg-yellow-700"
           >
             Create post-it
           </button>
         </div>
       </form>
+      <div className="flex justify-center">
+        <a href="https://github.com/ericbsantana/react-postit">
+          <FontAwesomeIcon
+            icon={faGithub}
+            className="text-purple-800 hover:text-purple-600"
+            size={"2x"}
+          />
+        </a>
+      </div>
     </aside>
   );
 };

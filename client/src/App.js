@@ -4,7 +4,7 @@ import Content from "./components/Content";
 import Sidebar from "./components/Sidebar";
 
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "http://192.168.15.99:3001";
 
 function App() {
   const [data, setData] = useState(null);
@@ -23,11 +23,21 @@ function App() {
 
   const deleteCard = async (id) => {
     try {
+      setData(data.filter((card) => card._id !== id));
       const response = await axios.delete("/delete", { data: { id: id } });
       console.log(response);
-      fetchPostIts();
     } catch (err) {
       console.log(err.message);
+    }
+  };
+
+  const addCard = async (data) => {
+    try {
+      const response = await axios.post("/create", data);
+      setData((prevState) => [...prevState, response.data]);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -37,11 +47,11 @@ function App() {
 
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-9 gap-5">
-        <div className="col-span-3 border-r border-yellow-300 ">
-          <Sidebar fetchPostIts={fetchPostIts} />
+      <div className="w-full lg:grid lg:grid-cols-9 lg:gap-5">
+        <div className="w-full border-b border-yellow-300 lg:col-span-3 lg:border-r lg:border-yellow-300 ">
+          <Sidebar fetchPostIts={fetchPostIts} addCard={addCard} />
         </div>
-        <div className="col-span-6">
+        <div className="grid grid-cols-1 lg:col-span-6">
           <Content
             fetchPostIts={fetchPostIts}
             deleteCard={deleteCard}
