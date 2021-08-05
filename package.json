@@ -1,4 +1,5 @@
 {
+  "name": "react-postit-server",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -6,5 +7,16 @@
     "mongoose": "^5.13.5",
     "nodemon": "^2.0.12",
     "path": "^0.12.7"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "scripts": {
+    "start": "node server.js",
+    "build": "cd client && yarn && yarn build"
+  },
+  "engines": {
+    "node": "12.18.2"
   }
 }
