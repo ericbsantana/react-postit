@@ -96,7 +96,11 @@ const Sidebar = (props) => {
         </div>
       </form>
       <div className="flex justify-center">
-        <a href="https://github.com/ericbsantana/react-postit">
+        <a
+          href="https://github.com/ericbsantana/react-postit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FontAwesomeIcon
             icon={faGithub}
             className="text-purple-800 hover:text-purple-600"
