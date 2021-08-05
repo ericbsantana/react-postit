@@ -12,7 +12,6 @@ const Content = () => {
     try {
       setLoading(true);
       const response = await axios.get("/fetch");
-      console.log(response);
       setData(response.data);
       setLoading(false);
     } catch (err) {
