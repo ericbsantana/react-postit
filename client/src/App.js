@@ -23,10 +23,8 @@ function App() {
 
   const deleteCard = async (id) => {
     try {
-      setLoading(true);
       const response = await axios.delete("/delete", { data: { id: id } });
       console.log(response);
-      setLoading(false);
       fetchPostIts();
     } catch (err) {
       console.log(err.message);
