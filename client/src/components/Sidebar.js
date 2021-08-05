@@ -1,6 +1,6 @@
 const Sidebar = () => {
   return (
-    <aside className="h-screen p-5 space-y-5 flex flex-col justify-center">
+    <aside className="sticky top-0 h-screen p-5 space-y-5 flex flex-col justify-center">
       <h1 className=" text-3xl text-purple-800 font-bold">Notepad</h1>
       <form className="form space-y-5">
         <div>
